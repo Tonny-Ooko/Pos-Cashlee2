@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="500"> <!-- Refresh the page every 5 seconds -->
+    <title>Login</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #007BFF; /* Blue background color */
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff; /* White form background */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 50%; /* Adjust the width as needed */
+            text-align: center;
+        }
+
+        h1 {
+            color: #007BFF; /* Blue text color */
+        }
+
+        form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 10px;
+            text-align: left;
+        }
+
+        label {
+            grid-column: 1;
+            grid-row: auto;
+        }
+
+        input {
+            grid-column: 2;
+            grid-row: auto;
+            width: 100%;
+        }
+
+        button {
+            grid-column: span 2;
+            background-color: #007BFF; /* Blue button color */
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+        /* Style for small buttons */
+.small-button {
+    padding: 6px 12px;
+    font-size: 14px;
+    background-color: #3498db; /* Change button background color to blue */
+    color: #ffffff; /* Button text color is white */
+    border: none;
+    cursor: pointer;
+}
+
+/* Style for small buttons on hover */
+.small-button:hover {
+    background-color: #2980b9; /* Darken the background color on hover */
+}
+
+/* Style for Reset Password and Forgot Password buttons */
+.reset-button {
+    background-color: #ffffff; /* Set Reset Password button background color to white */
+    color: #3498db; /* Set Reset Password button text color to blue */
+    border: none;
+    cursor: pointer;
+}
+
+/* Style for Reset Password and Forgot Password buttons on hover */
+.reset-button:hover {
+    background-color: #eeeeee; /* Lighten the background color on hover */
+    color: #3498db; /* Keep text color blue on hover */
+}
+<
+    .registration-button-container {
+    text-align: center; /* Center the button horizontally */
+    margin-top: 20px; /* Add some space between the form elements and the button */
+}
+
+    </style>
+    <script>
+    function togglePasswordVisibility() {
+        console.log("Function called"); // Add this line to check if the function is called
+        var passwordInput = document.getElementById("password");
+        var passwordToggle = document.querySelector(".password-toggle");
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            passwordToggle.textContent = "Hide Password";
+        } else {
+            passwordInput.type = "password";
+            passwordToggle.textContent = "Show Password";
+        }
+    }
+    </script>
+
+</head>
+
+<body>
+    <div class="container">
+        <h1>Login</h1>
+        <form method="post" action="{{ url_for('login') }}">
+
+            <label for="username">Username:</label>
+            <input type="text" name="username" required><br>
+
+            <label for="password">Password:</label>
+            <input type="password" name="password" required><br>
+
+            <button type="submit">Login</button>
+        </form>
+        <br>
+      <form method="post" action="{{ url_for('forgot_password') }}">
+    <input type="email" name="email" placeholder="Enter your email" required>
+    <button type="submit" class="small-button">Forgot Password</button>
+      </form>
+      <br>
+         <form method="post" action="{{ url_for('reset_password', token='1234Tonny!Ooko') }}">
+          <input type="hidden" name="token" value="{{ token }}">  <!-- Include the token if applicable -->
+        <button type="submit" class="small-button">Reset Password</button>
+     </form>
+
+
+            </div>
+       <form method="post" action="{{ url_for('register') }}">
+    <label for="username">Username:</label>
+    <input type="text" name="username" required><br>
+
+    <label for="email">Enter your email:</label>
+    <input type="email" id="email" name="email" required><br>
+
+       <label for="password">Password:</label>
+       <input type="password" id="password" name="password" required>
+       <span class="password-toggle" onclick="togglePasswordVisibility()">Show Password</span><br>
+
+       <label for="registerOption">Register as:</label>
+       <select name="registerOption" id="registerOption">
+           <option value="Manager">Manager</option>
+        <option value="Admin">Admin</option>
+       </select>
+
+    <!-- Container for the registration button at the bottom -->
+    <div class="registration-button-container">
+        <button type="submit">Register as Manager or Admin</button>
+    </div>
+   </form>
+
+       <div class="flash-messages">
+         {% with messages = get_flashed_messages() %}
+        {% if messages %}
+         <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+       </ul>
+    {% endif %}
+    {% endwith %}
+    </div>
+    <!-- ... -->
+
+            </div>
+        </form>
+    </div>
+</body>
+</html>

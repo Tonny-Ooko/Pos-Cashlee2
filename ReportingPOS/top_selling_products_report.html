@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Top Selling Products Report</title>
+    <style>
+        body {
+            background-color: #3498db; /* Blue background color */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Center vertically in the viewport */
+        }
+
+        .container {
+            background-color: #ffffff; /* White background color for the form */
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Optional box shadow for the container */
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: #3498db; /* Blue button background color */
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #2980b9; /* Darker blue on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Top Selling Products Report</h1>
+        <!-- Add content for the top selling products report here -->
+
+        <form method="POST" action="/generate_top_selling_products_report_pdf">
+            <button type="submit">Download PDF</button>
+        </form>
+    </div>
+
+</body>
+
+</html>
+

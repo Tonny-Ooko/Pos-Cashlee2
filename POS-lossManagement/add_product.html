@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Product</title>
+    <style>
+        body {
+            background-color: blue; /* Set background color to blue */
+            text-align: center; /* Center-align content */
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+        }
+
+        h1 {
+            color: black; /* Set color of "Add Product" to black */
+        }
+
+        .center-content {
+            background-color: white; /* Set the center background to white */
+            display: inline-block;
+            padding: 20px; /* Add padding to the center content */
+            border-radius: 10px; /* Rounded corners for the center content */
+            text-align: left; /* Align text inside the center content to the left */
+        }
+
+        ul {
+            list-style-type: none; /* Remove default list bullets */
+            padding: 0; /* Remove default padding */
+        }
+
+        li {
+            margin: 10px 0; /* Add margin for spacing between list items */
+        }
+
+        label {
+            display: block; /* Display labels as blocks for better spacing */
+            font-weight: bold; /* Make labels bold */
+        }
+
+        input {
+            width: 100%; /* Make input fields take full width */
+            padding: 5px; /* Add padding to input fields */
+            margin: 5px 0; /* Add margin to input fields */
+        }
+
+        button[type="submit"] {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: blue; /* Set button background color to blue */
+            color: white; /* Text color */
+            text-decoration: none; /* Remove underlines from links */
+            border: none;
+            border-radius: 5px; /* Rounded corners */
+            cursor: pointer; /* Add pointer cursor on hover */
+        }
+    </style>
+</head>
+<body>
+<h1>Add Product</h1>
+<div class="center-content">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    <form method="POST">
+        <label for="product_name">Product Name:</label>
+        <input type="text" name="product_name" required><br><br>
+        <label for="description">Product Description:</label>
+        <input type="text" name="description" required><br><br>
+        <label for="quantity">Quantity:</label>
+        <input type="number" name="quantity" required><br><br>
+        <label for="actual_quantity">Actual Quantity:</label>
+        <input type="number" name="actual_quantity" required><br><br>
+        <button type="submit">Add</button>
+    </form>
+</div>
+</body>
+</html>
+

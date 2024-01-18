@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Audit</title>
+</head>
+<body>
+    <h1>Audit Report</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Product ID</th>
+                <th>Discrepancy</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in audit_report %}
+                <tr>
+                    <td>{{ entry.product_id }}</td>
+                    <td>{{ entry.discrepancy }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

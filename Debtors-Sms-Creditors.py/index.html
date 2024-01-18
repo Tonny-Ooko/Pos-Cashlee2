@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debtors</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #007BFF; /* Blue background color */
+            font-family: Arial, sans-serif;
+        }
+        h1, h2 {
+            color: #fff; /* White text color */
+        }
+        form {
+            background-color: #fff; /* White form background */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            margin: 0 auto; /* Center horizontally */
+            width: 50%; /* Adjust the width as needed */
+        }
+        label, input, button {
+            display: block;
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: #007BFF; /* Blue button color */
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        table {
+            width: 50%; /* Set the width of the table */
+            border-collapse: collapse;
+            margin: 20px auto; /* Center the table horizontally */
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center; /* Center-align the content */
+        }
+    </style>
+</head>
+<body>
+    <h1>Debtors</h1>
+
+    <h2></h2>
+    <form method="post">
+        <label for="debtor_name">Debtor Name:</label>
+        <input type="text" name="debtor_name" required><br>
+
+        <label for="debt_amount">Debt Amount:</label>
+        <input type="number" name="debt_amount" required><br>
+
+        <label for="identification_number">Identification Number:</label>
+        <input type="text" name="identification_number" required><br>
+
+        <label for="phone_number">Phone Number:</label>
+        <input type="text" name="phone_number" required><br>
+
+        <button type="submit">Update Debtors</button>
+    </form>
+
+    <form method="post">
+        <button type="submit" name="check_debtors">Check Debtors</button>
+    </form>
+
+    <table>
+        <tr>
+            <th>Debtor Name</th>
+            <th>Debt Amount</th>
+            <th>Identification Number</th>
+            <th>Phone Number</th>
+        </tr>
+        <!-- Populate the table with debtor details from the database -->
+        <br>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+    </table>
+
+    <script>
+        // You can add JavaScript code here if needed
+    </script>
+</body>
+</html>
+
+
