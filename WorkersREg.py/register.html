@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px 0; /* Add padding to the top */
+            background-color: #007BFF; /* Blue background color */
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            color: #fff; /* White text color */
+            text-align: center;
+            margin-bottom: 20px; /* Add space below the title */
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            width: 80%; /* Adjust the width as needed */
+            margin-top: 20px; /* Add space above the form */
+        }
+
+        label, input, select {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        button {
+            background-color: #007BFF; /* Blue button color */
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px; /* Add space above the button */
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        footer {
+            color: #fff;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Register</h1>
+    <form action="/" method="post">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <label for="confirm">Confirm Password:</label>
+        <input type="password" id="confirm" name="confirm" required>
+
+        <label for="id_number">ID Number:</label>
+        <input type="text" id="id_number" name="id_number" required>
+
+        <label for="kra_number">KRA Number:</label>
+        <input type="text" id="kra_number" name="kra_number" required>
+
+        <label for="bank_account">Bank Account:</label>
+        <input type="text" id="bank_account" name="bank_account" required>
+
+        <label for="salary">Salary:</label>
+        <input type="number" id="salary" name="salary" required>
+
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender" required>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select>
+
+        <label for="duration_of_work">Duration of Work:</label>
+        <input type="text" id="duration_of_work" name="duration_of_work" required>
+
+        <label for="shift">Shift:</label>
+        <input type="text" id="shift" name="shift" required>
+
+        <button type="submit">Register</button>
+    </form>
+
+    {% if form.password.errors %}
+        {% for error in form.password.errors %}
+            <p style="color: red;">{{ error }}</p>
+        {% endfor %}
+        <br>
+    {% endif %}
+    {% if success_message %}
+        <p style="color: green;">{{ success_message }}</p>
+    {% endif %}
+
+    <footer style="text-align: center; margin-top: 20px;">
+        <p>&copy; 2023 Cashless Society. All rights reserved.</p>
+    </footer>
+</body>
+</html>
