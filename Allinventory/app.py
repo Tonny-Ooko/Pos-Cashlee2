@@ -71,7 +71,7 @@ class Product:
             if conn:
                 conn.close()
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/product_registration', methods=['GET', 'POST'])
 def product_registration():
     if request.method == 'POST':
         # Handle form submission and database insertion here

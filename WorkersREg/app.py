@@ -4,16 +4,16 @@ from wtforms import StringField, SelectField
 from wtforms.validators import InputRequired, Length
 import mysql.connector
 from flask_mysqldb import MySQL
+from flask_cors import CORS
 
 
-
-
-app = Flask(__name__, template_folder='.')
+app = Flask(__name__, template_folder='templates')
 app.secret_key = "Tonnyt%*^ooko12@2023"
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'TONNY'
 app.config['MYSQL_PASSWORD'] = '123456'
 app.config['MYSQL_DB'] = 'point_of_sale'
+CORS(app)  # Enable CORS for all routes
 
 
 # Establish a database connection
@@ -26,6 +26,8 @@ conn = mysql.connector.connect(
 
 mysql = MySQL(app)
 cursor = conn.cursor()
+
+
 
 class RegistrationForm(FlaskForm):
     username = StringField('Username', validators=[InputRequired()])
@@ -118,4 +120,4 @@ def delete_worker(worker_id):
         return redirect('/check_workers')  # Redirect back to check_workers page
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=5001)

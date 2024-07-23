@@ -15,8 +15,8 @@ db_config = {
 # Database Connection
 conn = mysql.connector.connect(**db_config)
 
-@app.route('/')
-def home():
+@app.route('/product_entry')
+def product_entry():
     return render_template('product_entry.html')
 
 @app.route('/process_sale', methods=['POST'])
@@ -58,7 +58,7 @@ def process_sale():
         flash(f"Points Earned: {points_earned}")
         flash(f"Total Points: {customer_points}")
 
-        return redirect(url_for('home'))
+        return redirect(url_for('product_entry'))
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -10,15 +10,15 @@ app.secret_key = 'your_secret_key'
 # MySQL database configuration
 db_config = {
     "host": "localhost",
-    "user": "root",
+    "user": "TONNY",
     "password": "123456",
-    "database": "inventory"
+    "database": "Product"
 }
 
 def create_table(conn):
     try:
         cursor = conn.cursor()
-        cursor.execute('''CREATE TABLE IF NOT EXISTS products
+        cursor.execute('''CREATE TABLE IF NOT EXISTS Product
                           (id INT AUTO_INCREMENT PRIMARY KEY,
                            product_name VARCHAR(255),
                            description TEXT,
@@ -33,7 +33,7 @@ def create_table(conn):
 def add_product(conn, product_info):
     try:
         cursor = conn.cursor()
-        cursor.execute('''INSERT INTO products (product_name, description, quantity, actual_quantity, return_quantity, waste_quantity)
+        cursor.execute('''INSERT INTO Product (product_name, description, quantity, actual_quantity, return_quantity, waste_quantity)
                           VALUES (%s, %s, %s, %s, %s, %s)''', (product_info['product_name'], product_info['description'],
                                                            product_info['quantity'], product_info['actual_quantity'],
                                                            product_info['return_quantity'], product_info['waste_quantity']))
@@ -43,9 +43,11 @@ def add_product(conn, product_info):
         flash("Error adding product.", "error")
         print("Error:", e)
 
-@app.route('/')
-def index():
-    return render_template('index.html')
+@app.route('/index1')
+def home1():
+    return render_template('index1.html')
+
+
 
 @app.route('/add_product', methods=['GET', 'POST'])
 def add_product_route():
@@ -90,7 +92,7 @@ def retrieve_product_db(conn):
         cursor = conn.cursor()
 
         # Execute a query to retrieve product data from the database
-        query = "SELECT * FROM your_product_table"  # Replace with your actual query
+        query = "SELECT * FROM Product"  # Replace with your actual query
         cursor.execute(query)
 
         # Fetch the product data
@@ -110,10 +112,10 @@ def retrieve_product_db(conn):
 try:
     conn = mysql.connector.connect(**db_config)
     product_data = retrieve_product_db(conn)
-    if product_data is not None:
-        print("Product data:", product_data)
-    else:
-        print("Error retrieving product data.")
+    #if product_data is not None:
+        #print("Product data:", product_data)
+    #else:
+        #print("Error retrieving product data.")
     conn.close()
 except mysql.connector.Error as e:
     print("Database error:", e)
@@ -219,7 +221,7 @@ def perform_physical_count_route():
             # Handle the case where product_db is None (e.g., show an error message)
             flash("Product data not available.", "error")
 
-        # Render the template with the product_db data or None
+        # Render the templates with the product_db data or None
         return render_template('perform_physical_count.html', product_db=product_db)
 
 # Define the retrieve_sales_data function
@@ -276,11 +278,11 @@ def audit_route():
 
     if product_db is None or sales_db is None:
         flash("Data not available for audit.", "error")
-        return redirect(url_for('index'))  # Redirect to the home page or an appropriate page
+        return redirect(url_for('index1'))  # Redirect to the home page or an appropriate page
 
     audit_report = audit(product_db, sales_db)  # Generate the audit report
 
-    return render_template('audit.html', audit_report=audit_report)
+    return render_template('audit30.html', audit_report=audit_report)
 
 def backup_data():
     # Your code to back up data goes here
@@ -290,7 +292,7 @@ def backup_data():
 def backup_data_route():
     backup_data()
     flash("Data backed up successfully.", "success")
-    return redirect(url_for('index'))
+    return redirect(url_for('index1'))
 
 def restore_data(backup_file):
     # Your code to restore data from the backup file goes here
@@ -300,7 +302,7 @@ def restore_data(backup_file):
 def restore_data_route(backup_file):
     restore_data(backup_file)
     flash("Data restored successfully.", "success")
-    return redirect(url_for('index'))
+    return redirect(url_for('index1'))
 
 
 if __name__ == "__main__":

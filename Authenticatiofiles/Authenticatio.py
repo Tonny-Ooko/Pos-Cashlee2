@@ -83,14 +83,14 @@ class ProductApp:
 
         self.root.withdraw()  # Hide the login window
 
-        # Render the template and pass user_roles as context
+        # Render the templates and pass user_roles as context
         product_ui.protocol("WM_DELETE_WINDOW", self.on_close)
         product_ui.protocol("WM_CLOSE", self.on_close)
 
         product_ui.wm_attributes("-topmost", 1)
         product_ui.focus_force()
 
-        # Render the template and pass user_roles as context
+        # Render the templates and pass user_roles as context
         render_template("product_info.html", user_roles=user_roles)
         # Create and configure UI elements for product information
         # ... (you can add labels, entry fields, buttons, etc.)

@@ -54,7 +54,7 @@ def index():
                           identification_number=identification_number, phone_number=phone_number)
         db.session.add(debtors)
         db.session.commit()
-    return render_template("index.html")
+    return render_template("index1.html")
 
 # Twilio API configuration
 twilio_account_sid = "your_account_sid"

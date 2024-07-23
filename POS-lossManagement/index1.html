@@ -48,7 +48,7 @@
 <body>
 <h1>Welcome to the Inventory Management System</h1>
 <div class="content">
-    <form method="POST" action="/indEx">
+    <form method="POST" action="/">
     <ul>
         <li><a href="{{ url_for('add_product_route') }}">Add Product</a></li>
         <li><a href="{{ url_for('record_return_route') }}">Record Return</a></li>
@@ -58,16 +58,12 @@
         <li><a href="{{ url_for('backup_data_route') }}">Backup Data</a></li>
     </ul>
     <br>
-    <h2>Loss Prevention System Menu</h2>
-    <ul>
-        <li><a href="{{ url_for('add_product_route') }}" class="button">Add Product</a></li>
-        <!-- Add other menu options here -->
-    </ul>
+
 
   </form>
 
  <footer>
-        <p>&copy; 2023 Cashless Society. All rights reserved.</p>
+        <p>&copy; 2024 Cashless Society. All rights reserved.</p>
     </footer>
 
 </body>

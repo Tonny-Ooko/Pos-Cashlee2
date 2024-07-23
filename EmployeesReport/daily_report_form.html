@@ -1,10 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Report Form</title>
 </head>
 <body>
-$END$
+    <h1>Daily Report Form</h1>
+    <form method="POST" action="/">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" required><br>
+
+        <label for="employee_id">Employee ID:</label><br>
+        <input type="text" id="employee_id" name="employee_id" required><br>
+
+        <label for="department">Department or Team:</label><br>
+        <input type="text" id="department" name="department" required><br>
+
+        <label for="position">Position or Role:</label><br>
+        <input type="text" id="position" name="position" required><br>
+
+        <label for="contact_info">Contact Information:</label><br>
+        <input type="text" id="contact_info" name="contact_info" required><br>
+
+        <label for="start_time">Start Time:</label><br>
+        <input type="time" id="start_time" name="start_time" required><br>
+
+        <label for="end_time">End Time:</label><br>
+        <input type="time" id="end_time" name="end_time" required><br>
+
+        <label for="break_times">Break Times (comma-separated in minutes):</label><br>
+        <input type="text" id="break_times" name="break_times"><br>
+
+        <label for="tasks">Tasks:</label><br>
+        <textarea id="tasks" name="tasks" rows="4" required></textarea><br>
+
+        <label for="incidents">Incidents or Events:</label><br>
+        <textarea id="incidents" name="incidents" rows="4"></textarea><br>
+
+        <label for="equipment_used">Equipment or Resources Used:</label><br>
+        <textarea id="equipment_used" name="equipment_used" rows="4"></textarea><br>
+
+        <label for="compliance_checklist">Compliance Checklist:</label><br>
+        <textarea id="compliance_checklist" name="compliance_checklist" rows="4"></textarea><br>
+
+        <label for="quality_control">Quality Control:</label><br>
+        <textarea id="quality_control" name="quality_control" rows="4"></textarea><br>
+
+        <label for="comments">Comments or Notes:</label><br>
+        <textarea id="comments" name="comments" rows="4"></textarea><br>
+
+        <label for="employee_signature">Employee Signature:</label><br>
+        <input type="text" id="employee_signature" name="employee_signature" required><br>
+
+        <label for="supervisor_signature">Supervisor Signature:</label><br>
+        <input type="text" id="supervisor_signature" name="supervisor_signature" required><br>
+
+        <button type="submit">Submit</button>
+    </form>
 </body>
 </html>

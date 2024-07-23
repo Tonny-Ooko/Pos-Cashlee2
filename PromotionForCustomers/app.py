@@ -6,9 +6,9 @@ app.secret_key = '123456TonnyOoko^'
 # MySQL database configuration
 db_config = {
     "host": "localhost",
-    "user": "root",
+    "user": "TONNY",
     "password": "123456",
-    "database": "PointOfSale"
+    "database": " Product"
 }
 
 @app.route('/', methods=['GET', 'POST'])
@@ -22,7 +22,7 @@ def apply_promotion():
             cursor = conn.cursor()
 
             # Get the current price of the product
-            get_price_query = "SELECT price FROM Products WHERE name = %s"
+            get_price_query = "SELECT price FROM Product WHERE name = %s"
             cursor.execute(get_price_query, (product_name,))
             result = cursor.fetchone()
 
@@ -34,7 +34,7 @@ def apply_promotion():
                 discounted_price = product_price * (1 - discount_percentage)
 
                 # Update the Products table with the new discount
-                update_query = "UPDATE Products SET discount = %s WHERE name = %s"
+                update_query = "UPDATE Product SET discount = %s WHERE name = %s"
                 cursor.execute(update_query, (discount_percentage, product_name))
                 conn.commit()
 

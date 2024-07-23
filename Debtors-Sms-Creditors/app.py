@@ -15,15 +15,15 @@ db = mysql.connector.connect(
 cursor = db.cursor()
 
 
-@app.route('/', methods=['GET', 'POST'])
-def index():
+@app.route('/index2', methods=['GET', 'POST'])
+def index2():
     message = None  # Initialize message variable
     if request.method == 'POST':
         if 'check_debtors' in request.form:
             # Fetch debtors from the database and display in table
             cursor.execute("SELECT * FROM debtors")
             debtors = cursor.fetchall()
-            return render_template('index.html', debtors=debtors)  # Render index.html with debtor details
+            return render_template('index1.html', debtors=debtors)  # Render index1.html with debtor details
         else:
             debtor_name = request.form['debtor_name']
             debt_amount = request.form['debt_amount']
@@ -35,7 +35,7 @@ def index():
             cursor.execute(query, (debtor_name, debt_amount, identification_number, phone_number, debt_amount, identification_number, phone_number))
             db.commit()
             message = 'Details updated successfully!'  # Update message variable
-    return render_template('index.html', message=message)
+    return render_template('index1.html', message=message)
 
 
 @app.route('/creditors')

@@ -229,7 +229,7 @@ def authorized():
             request.args['error_reason'],
             request.args['error_description']
         ))
-        return redirect(url_for('index'))
+        return redirect(url_for('index3'))
 
     session['google_token'] = (response['access_token'], '')
     user_info = google.get('userinfo')
@@ -237,11 +237,6 @@ def authorized():
     # Store or use user_info as needed, e.g., save user to your database
 
     return 'Logged in as: ' + user_info.data['email']
-
-
-#@google.tokengetter
-#def get_google_oauth_token():
-    #return session.get('google_token')
 
 
 @app.route('/oauth_callback')
@@ -253,7 +248,7 @@ def oauth_callback():
             request.args['error_reason'],
             request.args['error_description']
         ))
-        return redirect(url_for('index'))
+        return redirect(url_for('index3'))
 
 
 class point_of_sale(db.Model):
@@ -281,9 +276,9 @@ def generate_reset_token():
     return token, expiration
 
 
-@app.route("/")
-def index():
-    return render_template("index.html")
+@app.route("/index3")
+def index3():
+    return render_template("index3.html")
 
 
 @app.route("/product_info")
@@ -295,13 +290,13 @@ def product_info():
 
 
 # Define the registration route
-@app.route('/registration')
-def registration():
-    return render_template('registration.html')
+@app.route('/registration2')
+def registration2():
+    return render_template('registration2.html')
 
 
-@app.route("/register", methods=["GET", "POST"])
-def register():
+@app.route("/register2", methods=["GET", "POST"])
+def register2():
     username = request.form["username"]
     email = request.form["email"]
     password = request.form["password"]  # Ensure a password is provided
@@ -310,14 +305,14 @@ def register():
     # Check if the password field is empty
     if not password:
         flash("Password is required.", "error")
-        return redirect(url_for("index"))
+        return redirect(url_for("index3"))
 
     # Password strength validation
     if not password_pattern.match(password):
         flash(
             "Password must be at least six characters long and contain at least one uppercase letter, one lowercase letter, and one digit.",
             "error")
-        return redirect(url_for("registration"))
+        return redirect(url_for("registration2"))
 
     if not point_of_sale.query.filter_by(username=username).first():
         # User does not exist, create a new user
@@ -341,7 +336,7 @@ def register():
         flash("Username already exists", "error")
 
     # If registration is not successful, render the registration page again
-    return render_template('registration.html')
+    return render_template('registration2.html')
 
 
 
@@ -361,7 +356,7 @@ def reset_password(token):
             user.reset_token_expiration = None
             db.session.commit()
             flash("Password reset successfully.", "success")
-            return redirect(url_for("login"))
+            return redirect(url_for("login4"))
         return render_template("reset_password")
     else:
         flash("Invalid or expired token. Please request a new password reset.", "error")
@@ -391,8 +386,8 @@ def forgot_password():
             flash("Email address not found.", "error")
     return render_template("forgot_password.html")
 
-@app.route("/login", methods=["GET", "POST"])
-def login():
+@app.route("/login2", methods=["GET", "POST"])
+def login2():
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
@@ -406,10 +401,10 @@ def login():
         else:
             flash("Invalid username or password", "error")
 
-    return render_template("index.html")
+    return render_template("index3.html")
 
-@app.route('/audit', methods=['GET', 'POST'])
-def audit():
+@app.route('/audit2', methods=['GET', 'POST'])
+def audit2():
     # Assuming 'AuditResult' is a model representing audit results in your database
 
     if request.method == 'POST':
@@ -419,24 +414,24 @@ def audit():
         db.session.commit()
 
     audit_results = AuditResult.query.all()
-    return render_template('audit.html', audit_results=audit_results)
+    return render_template('audit30.html', audit_results=audit_results)
 
-@app.route("/logout")
-def logout():
+@app.route("/logout2")
+def logout2():
     session.pop("user_id", None)
-    return redirect(url_for("index"))
+    return redirect(url_for("index3"))
 
 
 # Route for showing a success message after registration
 @app.route("/registration_success")
 def registration_success():
-    return render_template("index.html", registration_successful=True)
+    return render_template("index3.html", registration_successful=True)
 
 
 # Route for showing a success message after password reset
 @app.route("/password_reset_success")
 def password_reset_success():
-    return render_template("index.html", password_reset_successful=True)
+    return render_template("index3.html", password_reset_successful=True)
 
 
 if __name__ == "__main__":

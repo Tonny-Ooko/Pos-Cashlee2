@@ -49,14 +49,14 @@
 <body>
     <div class="results-form">
         <h1>Audit Results</h1>
-        <form method="post" action='/audit'>
+        <form method="post" action='/audit2'>
             <label for="result_text">Audit Result:</label>
             <input type="text" name="result_text" required>
             <br><br>
             <button type="submit" class="save-button">Save Result</button>
         </form>
         <br>
-        <a href="{{ url_for('logout') }}" class="logout-link">Logout</a>
+        <a href="{{ url_for('logout2') }}" class="logout-link">Logout</a>
     </div>
         <footer style="text-align: center; margin-top: 20px;">
         <p>&copy; 2024 Cashless Society. All rights reserved.</p>

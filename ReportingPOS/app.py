@@ -1,12 +1,10 @@
 # Import the necessary modules and classes
 from flask import (
     Flask, render_template, request, flash, redirect, url_for, session,
-    send_file, jsonify, current_app,Blueprint
-)
+    send_file, jsonify, current_app,Blueprint)
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import (
-    LoginManager, login_user, login_required, current_user, logout_user, UserMixin
-)
+    LoginManager, login_user, login_required, current_user, logout_user, UserMixin)
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 from sqlalchemy.ext.hybrid import hybrid_property
 
@@ -28,17 +26,13 @@ from passlib.context import CryptContext
 # Import argon2-specific classes
 from argon2 import PasswordHasher, exceptions as argon2_exceptions
 from argon2.exceptions import VerifyMismatchError
-# Import your custom modules
-from .auth_module import db,User
-from .your_auth_module import find_user  # Adjust this import as needed
-from .custom_json_encoder import CustomJSONEncoder  # Import your custom JSON encoder
 from flask_jwt_extended import create_access_token
+
 
 app = Flask(__name__, template_folder='.')
 #$app.json_encoder = CustomJSONEncoder  # Set the custom JSON encoder
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:123456@localhost/users'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://TONNY:123456@localhost/point_of_sale'
 #db = SQLAlchemy(app)
-db.init_app(app)
 migrate = Migrate(app)
 Base = declarative_base()
 login_manager = LoginManager()
@@ -52,20 +46,34 @@ ph = PasswordHasher()
 # Initialize the passlib context
 pwd_context = CryptContext(schemes=["argon2"])
 # Set the custom JSON encoder
-app.json_encoder = CustomJSONEncoder
-
+db = SQLAlchemy(app)
 # Configure logging
+
 logging.basicConfig(level=logging.DEBUG)
+headers = {"Content-Type": "application/json"}
 
 # Replace these with your actual database credentials
 db_config = {
     "host": "localhost",
-    "user": "root",
+    "user": "TONNY",
     "password": "123456",
-    "database": "users"
+    "database": "point_of_sale"
 }
 
-app.secret_key = "12230tonnyOoko^%$3"  # Change this to a secret key for session management
+
+app.secret_key = "12230tonnyOoko^%$3"  # Change this to a secret key for session managemen
+class User(db.Model):
+    __tablename__ = 'user_info'  # Match the actual table name in your database
+
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(255), unique=True, nullable=False)
+    password_hash = db.Column(db.String(255), nullable=False)
+    role = db.Column(db.String(50), nullable=False)
+    #is_active = db.Column(db.Boolean, default=True)  # Add is_active field
+
+
+
+Base = declarative_base()
 
 
 def __json__(self):
@@ -86,37 +94,16 @@ def some_function():
 def __init__(self, username):
         self.username = username
 
-class User:
-    def __init__(self, username, email):
-        self.username = username
-        self.email = email
-
-
-
 @app.route('/api/data')
 def get_data():
     data = {'key': 'value', 'number': 42}
     return jsonify(data)
 
-@hybrid_property
-def password(self):
-        return self._password
 
 def hash_password(password):
     return bcrypt_sha256.hash(password)
 
 # Define a route that retrieves a user by username
-@app.route('/user/<username>')
-def get_user(username):
-    user = find_user(username)
-    if user:
-        return jsonify(user)
-    else:
-        return jsonify({'message': 'User not found'}), 404
-
-@password.setter
-def password(self, value):
-        self._password = ph.hash(value)
 
 
 @app.route('/protected')
@@ -137,10 +124,10 @@ def check_password(entered_password, stored_password_hash):
         return False
 
 
-@auth_bp.route('/login', methods=['GET'])
+@auth_bp.route('/login1', methods=['GET'])
 def display_login_form():
-    # Render your login form template here
-    return render_template('login.html')
+    # Render your login form templates here
+    return render_template('login1.html')
 
 def user_to_dict(user):
     return {
@@ -191,15 +178,15 @@ def authenticate(username, password, role):
             conn.close()
 
 # Define the login route
-@app.route('/login', methods=['GET', 'POST'])
-def login():
+@app.route('/login1', methods=['GET', 'POST'])
+def login1():
     if request.method == 'POST':
         if request.is_json:
             try:
                 data = request.get_json()
-                username = data.get('username').strip()
-                password = data.get('password').strip()
-                role = data.get('role').strip()
+                username = data.get('username')
+                password = data.get('password')
+                role = data.get('role')
             except Exception as e:
                 print(f"Error parsing JSON data: {str(e)}")
                 return jsonify({'message': 'Invalid JSON data.'}), 400
@@ -213,18 +200,14 @@ def login():
         if not username or not password or not role:
             return jsonify({'message': 'Invalid request. Required fields missing.'}), 400
 
-            # Query the database to check if the user exists
+        # Query the database to check if the user exists
         user = User.query.filter_by(username=username).first()
         if user:
             # Verify the password hash
             try:
-                if ph.verify(user.password_hash, password):
+                if user and argon2.verify(password, user.password_hash):
                     if role == user.role:
-                        db.session.commit()  # Commit the changes
-
-                        # Store the user's ID in the session
-                        session['user_id'] = username
-
+                        session['user_id'] = user.id  # Store the user's ID in the session
                         print("Login successful.")  # Add a debug statement
 
                         # Redirect to the 'index' route when login is successful
@@ -233,24 +216,26 @@ def login():
                         return jsonify({'message': 'Login failed. Invalid role.'}), 401
                 else:
                     return jsonify({'message': 'Login failed. Invalid credentials.'}), 401
-            except argon2_exceptions.VerifyMismatchError:
-                return jsonify({'message': 'Login failed. Invalid credentials.'}), 401
+            except Exception as e:
+                print(f"Error verifying password: {str(e)}")
+                return jsonify({'message': 'Login failed. Internal server error.'}), 500
         else:
             print(f"User '{username}' not found in the database.")  # Add a debug statement
             return jsonify({'message': 'User not found.'}), 404
 
     # If it's a GET request, render the login page
-    return render_template('login.html')
+    return render_template('login1.html')
+
 
 # Define the index routec
 @app.route('/index')
 def index():
-    # Add logic here to ensure that only authenticated users can access 'index.html'
+    # Add logic here to ensure that only authenticated users can access 'index1.html'
     if 'user_id' in session:
         username = session['user_id']
-        return render_template('index.html', user={'username': username})
+        return render_template('index1.html', user={'username': username})
     else:
-        return redirect(url_for('login'))  # Redirect to login if user is not authenticated
+        return redirect(url_for('login1'))
 
 # Register the blueprint with your app
 app.register_blueprint(auth_bp, url_prefix='/auth')
@@ -276,7 +261,7 @@ def logout():
         return jsonify({'message': 'Logout successful'}), 200
     else:
         # Otherwise, redirect to the login page
-        return redirect(url_for('login'))
+        return redirect(url_for('login1'))
 
 # Define the sales_report route
 @app.route('/sales_report')
@@ -284,7 +269,7 @@ def sales_report():
     if 'user_id' in session:
         return render_template('sales_report.html')
     else:
-        return redirect(url_for('login'))
+        return redirect(url_for('login1'))
 
 # Define the top_selling_products_report route
 @app.route('/top_selling_products_report')
@@ -292,7 +277,7 @@ def top_selling_products_report():
     if 'user_id' in session:
         return render_template('top_selling_products_report.html')
     else:
-        return redirect(url_for('login'))
+        return redirect(url_for('login1'))
 
 # Define the revenue_trends_report route
 @app.route('/revenue_trends_report')
@@ -300,15 +285,15 @@ def revenue_trends_report():
     if 'user_id' in session:
         return render_template('revenue_trends_report.html')
     else:
-        return redirect(url_for('login'))
+        return redirect(url_for('login1'))
 
 @app.route('/')
 def home():
     if 'user' in session:
         user = session['user']
-        return render_template('index.html', user=user)
+        return render_template('index1.html', user=user)
     else:
-        return redirect(url_for('login'))
+        return redirect(url_for('login1'))
 
 
 @app.route('/generate_sales_report_pdf', methods=['POST'])
@@ -363,10 +348,8 @@ def generate_report():
     pdf.save(os.path.join(pdf_path, pdf_filename))
 
     return send_file(os.path.join(pdf_path, pdf_filename), as_attachment=True, download_name=pdf_filename)
-# Create similar routes and functions for other reports (e.g., top_selling_products_report_pdf, revenue_trends_report_pdf).
 
-# Import the User model
-from .auth_module import User  # Adjust the import path as needed
+
 if __name__ == '__main__':
     app.run()
 

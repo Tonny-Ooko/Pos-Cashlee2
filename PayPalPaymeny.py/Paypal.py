@@ -12,7 +12,7 @@ app = Flask(__name__, template_folder='.')
 @app.route("/")
 def index():
     # Implement your homepage view here
-    return render_template("index.html")
+    return render_template("index1.html")
 
 # Add more routes as needed
 db_config = {
