@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #007BFF; /* Blue background color */
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh; /* Set minimum height to 100% of viewport height */
+        }
+
+        .container {
+            background-color: #fff; /* White form background */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 50%; /* Adjust the width as needed */
+            text-align: center;
+        }
+
+        h1 {
+            color: #007BFF; /* Blue text color */
+        }
+
+        form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 10px;
+            text-align: left;
+        }
+
+        label {
+            grid-column: 1;
+            grid-row: auto;
+        }
+
+        input, select {
+            grid-column: 2;
+            grid-row: auto;
+            width: 100%;
+            box-sizing: border-box; /* Include padding and border in width calculation */
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .password-toggle {
+            cursor: pointer;
+            display: inline-block;
+            margin-left: 5px;
+            color: #007BFF;
+        }
+
+        button {
+            grid-column: span 2;
+            background-color: #007BFF; /* Blue button color */
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .registration-button-container {
+            text-align: center; /* Center the button horizontally */
+            margin-top: 20px; /* Add some space between the form elements and the button */
+        }
+
+        .registration-button-container button {
+            background-color: gold; /* Set the background color to gold */
+            color: #fff; /* Set the text color to white */
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .registration-button-container button:hover {
+            background-color: #ffd700; /* Darken the background color on hover */
+        }
+
+        footer {
+            position: absolute; /* Position the footer absolutely */
+            bottom: 0; /* Stick it to the bottom */
+            width: 100%; /* Full width */
+            background-color: #007BFF; /* Blue background color */
+            color: #fff; /* White text color */
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- Registration form -->
+    <!-- Successful registration message -->
+    <div id="success-message" style="display: none;">Registration Successful!</div>
+
+    <form method="post" action="{{ url_for('register2') }}">
+        <label for="username">Username:</label>
+        <input type="text" name="username" required>
+
+        <label for="email">Enter your email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <span class="password-toggle" onclick="togglePasswordVisibility()">Show Password</span>
+
+        <label for="registerOption">Register as:</label>
+        <select name="registerOption" id="registerOption">
+            <option value="Manager">Manager</option>
+            <option value="Admin">Admin</option>
+        </select>
+
+        <!-- Container for the registration button at the bottom -->
+        <div class="registration-button-container">
+            <button type="submit">Register as Manager or Admin</button>
+        </div>
+    </form>
+</div>
+
+<footer>
+    <p>&copy; 2024 Cashless Society. All rights reserved.</p>
+</footer>
+
+<script>
+    function togglePasswordVisibility() {
+        console.log("Function called");
+        var passwordInput = document.getElementById("password");
+        var passwordToggle = document.querySelector(".password-toggle");
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            passwordToggle.textContent = "Hide Password";
+        } else {
+            passwordInput.type = "password";
+            passwordToggle.textContent = "Show Password";
+        }
+    }
+</script>
+</body>
+</html>

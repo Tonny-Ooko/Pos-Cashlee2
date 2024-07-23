@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomePage</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: gold; /* Set background color to gold */
+            color: blue; /* Set default text color to blue */
+        }
+
+
+
+        /* Top navigation bar style */
+        .top-navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 1cm; /* Adjusted width for top navigation bar */
+            background-color: #000; /* Black background color for top navigation bar */
+            color: white; /* Text color for navbar items */
+        }
+
+        /* Left navigation bar style */
+        .left-navbar {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            padding: 10px;
+            background-color: blue; /* Blue background color for left navigation */
+            width: 3cm; /* Width for left navigation bar */
+            height: 100vh; /* Full height from top to bottom */
+            position: fixed;
+            top: 0; /* Align to the top */
+            left: 0; /* Align to the left */
+            z-index: 1; /* Ensure left navigation bar appears above other content */
+        }
+
+        /* Navigation bar items style */
+        .nav-link {
+            text-decoration: none; /* Remove underline */
+            color: white; /* Set text color */
+            margin-right: 10px;
+            display: inline-block; /* Display each link as an inline block element */
+            margin-bottom: 10px; /* Add margin at the bottom for spacing */
+        }
+
+        /* Navigation bar items style on hover */
+        .nav-link:hover {
+            color: #007bff; /* Change text color on hover */
+        }
+
+        /* Centered content style */
+        .centered-content {
+            text-align: center;
+            margin-top: 50px; /* Adjusted margin for centered content */
+        }
+
+        /* Favorite folder style */
+        .favorite-folder {
+            font-weight: bold;
+            color: blue; /* Strong colored text in blue */
+            font-size: 24px; /* Set font size for the title */
+        }
+
+        /* Footer style */
+        footer {
+            text-align: center;
+            background-color: #333; /* Dark background color for footer */
+            color: white; /* Text color for footer */
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+     <!-- Top navigation bar -->
+    <div class="top-navbar">
+        <div class="right-group">
+            <a href="{{ url_for('register') }}" class="nav-link">Register</a>
+            <a href="/login1" class="nav-link">Login</a>
+            <a href="/apply_promotion" class="nav-link">Apply Promotion</a>
+            <a href="/index1" class="nav-link">Inventory Management</a>
+        </div>
+    </div>
+
+    <!-- Left navigation bar for the remaining links -->
+    <div class="left-navbar">
+        <a href="/product_entry" class="nav-link">Point of Sale and Loyalty Management</a>
+        <a href="/index2" class="nav-link">Debtors-Sms-Creditors</a>
+        <a href="/product_registration" class="nav-link">Product Registration</a>
+        <a href="/index3" class="nav-link">Authentication files</a>
+        <a href="/transactions" class="nav-link">Login</a>
+    </div>
+     <h1>Payment Status</h1>
+    {% if message %}
+        <p>{{ message }}</p>
+    {% endif %}
+    {% if error %}
+        <p>{{ error }}</p>
+    {% endif %}
+
+    <!-- Centered content -->
+    <div class="centered-content">
+        <!-- Favorite folder -->
+        <div class="favorite-folder">CASHLESS POINT OF SALE HUGE SALE</div>
+        <!-- "Welcome to Homepage" text -->
+        <h1>Welcome to Homepage</h1>
+        <!-- Messaging details -->
+        {% if success_message %}
+        <div>{{ success_message }}</div>
+        {% endif %}
+    </div>
+
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2024 Cashless Society. All rights reserved.
+    </footer>
+</body>
+</html>

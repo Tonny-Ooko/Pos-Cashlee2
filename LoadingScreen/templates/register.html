@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px 0; /* Add padding to the top */
+            background-color: #007BFF; /* Blue background color */
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        /* Style for navigation bar */
+        .navbar {
+            background-color: gold; /* Gold color */
+            padding: 10px;
+            position: fixed;
+            top: 0;
+            right: 0;
+        }
+
+        /* Style for navigation links */
+        .navbar a {
+            color: black; /* Black text color */
+            text-decoration: none;
+            margin-left: 10px;
+        }
+
+        h1 {
+            color: #fff; /* White text color */
+            text-align: center;
+            margin-bottom: 20px; /* Add space below the title */
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            width: 80%; /* Adjust the width as needed */
+            margin-top: 20px; /* Add space above the form */
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px; /* Adjust the margin between labels */
+            font-weight: bold; /* Make labels bold */
+        }
+
+        input,
+        select {
+            width: 100%; /* Make input fields full width */
+            padding: 8px; /* Add padding to input fields */
+            margin-bottom: 10px; /* Adjust the margin below input fields */
+            border-radius: 4px; /* Add border radius to input fields */
+            border: 1px solid #ccc; /* Add border to input fields */
+            box-sizing: border-box; /* Ensure padding and border are included in the width */
+        }
+
+        button {
+            background-color: #007BFF; /* Blue button color */
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px; /* Add space above the button */
+            width: 100%; /* Make button full width */
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        footer {
+            color: #fff;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <!-- Add link to Check Workers -->
+        <a href="/check_workers">Check Workers</a>
+    </div>
+    <br>
+
+    {% if success_message %}
+    <div class="alert alert-success" style="color: red;">
+        <strong>{{ success_message }}</strong>
+    </div>
+    {% endif %}
+
+    <h1>Register</h1>
+    <form action="/" method="post">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="id_number">ID Number:</label>
+        <input type="text" id="id_number" name="id_number" required>
+
+        <label for="kra_number">KRA Number:</label>
+        <input type="text" id="kra_number" name="kra_number" required>
+
+        <label for="bank_account">Bank Account:</label>
+        <input type="text" id="bank_account" name="bank_account" required>
+
+        <label for="salary">Salary:</label>
+        <input type="number" id="salary" name="salary" required>
+
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender" required>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select>
+
+        <label for="phone_number">Phone Number:</label>
+        <input type="text" id="phone_number" name="phone_number" required>
+
+        <label for="duration_of_work">Duration of Work:</label>
+        <input type="text" id="duration_of_work" name="duration_of_work" required>
+
+        <label for="shift">Shift:</label>
+        <input type="text" id="shift" name="shift" required>
+
+        <label for="role">Role:</label>
+        <input type="text" id="role" name="role" required>
+
+        <button type="submit">Register</button>
+    </form>
+
+    <br>
+    <footer>
+        <p>&copy; 2023 Cashless Society. All rights reserved.</p>
+    </footer>
+</body>
+</html>

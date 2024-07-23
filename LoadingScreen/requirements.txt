@@ -1,0 +1,5 @@
+flask-dance==5.0.0
+flask-oauthlib==0.9.5
+oauthlib==2.1.0
+Flask==3.0.2
+requests==2.31.0

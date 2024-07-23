@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Apply Promotion</title>
+    <style>
+        body {
+            background-color: #3498db;
+            font-family: Arial, sans-serif;
+            color: #ffffff;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            width: 400px;
+            margin: 100px auto 0;
+            text-align: left; /* Align text to the left */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            margin-top: 10px;
+            font-size: 24px;
+            color: black;
+        }
+
+        label {
+            display: block; /* Change to block to align with textboxes */
+            margin-bottom: 5px; /* Add space between label and textbox */
+            color: black;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 12px); /* Adjust width to leave space for padding */
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        button[type="submit"] {
+            background-color: #3498db;
+            color: #ffffff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .error {
+            color: red;
+        }
+
+        .success {
+            color: green;
+        }
+
+        footer {
+            width: 100%;
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: #fff;
+            margin-top: auto; /* Push the footer to the bottom */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Apply Promotion</h1>
+        <form method="POST" action="/apply_promotion">
+            <label for="product_name">Product Name:</label>
+            <input type="text" id="product_name" name="product_name" required><br>
+
+            <label for="discount_percentage">Discount Percentage:</label>
+            <input type="text" id="discount_percentage" name="discount_percentage" required><br>
+
+            <button type="submit">Apply Promotion</button>
+        </form>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li class="{% if 'error' in message %}error{% else %}success{% endif %}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <footer>
+        <p>&copy; 2023 Cashless Society. All rights reserved.</p>
+    </footer>
+</body>
+</html>
+

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Workers</title>
+    <style>
+        body {
+            background-color: gold; /* Gold background color */
+            text-align: center; /* Center-align text */
+        }
+        h1 {
+            margin-top: 50px; /* Add space at the top */
+        }
+        table {
+            margin: 0 auto; /* Center-align the table */
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid black;
+        }
+        a {
+            display: block; /* Display Back to Registration link as a block element */
+            margin-top: 20px; /* Add space at the top */
+            text-decoration: none;
+        }
+        .delete-btn {
+            background-color: red; /* Red background color for delete button */
+            color: white; /* White text color */
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Check Workers</h1>
+    {% if workers %}
+    <table>
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>ID Number</th>
+                <th>KRA Number</th>
+                <th>Bank Account</th>
+                <th>Salary</th>
+                <th>Gender</th>
+                <th>Phone Number</th>
+                <th>Duration of Work</th>
+                <th>Shift</th>
+                <th>Role</th>
+                <th>Action</th> <!-- Add column for action buttons -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for worker in workers %}
+            <tr>
+                <td>{{ worker[1] }}</td>
+                <td>{{ worker[2] }}</td>
+                <td>{{ worker[3] }}</td>
+                <td>{{ worker[4] }}</td>
+                <td>{{ worker[5] }}</td>
+                <td>{{ worker[6] }}</td>
+                <td>{{ worker[7] }}</td>
+                <td>{{ worker[8] }}</td>
+                <td>{{ worker[9] }}</td>
+                <td>{{ worker[10] }}</td>
+                <td><button class="delete-btn" onclick="deleteWorker('{{ worker[0] }}')">Delete</button></td> <!-- Add delete button -->
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No workers found.</p>
+    {% endif %}
+    <a href="/">Back to Registration</a>
+
+    <script>
+        function deleteWorker(workerId) {
+            if (confirm("Are you sure you want to delete this worker?")) {
+                window.location.href = "/delete_worker/" + workerId; // Redirect to delete route with worker id
+            }
+        }
+    </script>
+
+<br>
+    <footer style="text-align: center; margin-top: 20px;">
+        <p>&copy; 2023 Cashless Society. All rights reserved.</p>
+    </footer>
+</body>
+</html>

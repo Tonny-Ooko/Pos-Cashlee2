@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Audit</title>
+    <style>
+        .active {
+            font-weight: bold; /* or any other styling for active link */
+        }
+    </style>
+</head>
+<body>
+    <h1>Audit Report</h1>
+     <form method="POST" action="/audit">
+        <input type="submit" value="Audit Results">
+    </form>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Product ID</th>
+                <th>Discrepancy</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in audit_report %}
+                <tr>
+                    <td>{{ entry.product_id }}</td>
+                    <td>{{ entry.discrepancy }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+
+   <footer>
+        <p>&copy; 2023 Cashless Society. All rights reserved.</p>
+    </footer>
+</body>
+</html>

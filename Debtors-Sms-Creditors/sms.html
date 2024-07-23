@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMS Marketing</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #007BFF;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+
+        .message-box {
+            width: 100%;
+            height: 150px;
+            padding: 5px;
+            resize: vertical;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+       <div class="form">
+       <form method="post" action="/sms">
+        <label for="message">Write Message:</label>
+        <textarea class="message-box" name="message" placeholder="Write your SMS message here" required></textarea><br><br>
+        <label for="phone_numbers">Enter Phone Numbers (separated by commas):</label>
+        <input type="text" name="phone_numbers" placeholder="Enter phone numbers" required><br><br>
+        <button type="submit" class="button" name="send_sms">Send SMS</button>
+        </form>
+      </div>
+    </div>
+    <hr>
+        <form method="post">
+            <input type="text" name="search_term" placeholder="Search Phone Numbers">
+            <button type="submit" class="button" name="search_numbers">Search</button>
+        </form>
+        {% if phone_numbers %}
+        <h2>Phone Numbers</h2>
+        <ul>
+            {% for phone_number in phone_numbers %}
+            <li>{{ phone_number[1] }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+</body>
+<footer style="text-align: center; margin-top: 20px;">
+        <p>&copy; 2024 Cashless Society. All rights reserved.</p>
+    </footer>
+</html>
+
+

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receipt</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            width: 600px;
+            margin: auto;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        .receipt-details {
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .total {
+            text-align: right;
+            font-weight: bold;
+        }
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ supermarket_name }}</h1>
+        <h2>{{ branch }}</h2>
+        <div class="receipt-details">
+            <p><strong>Address:</strong> {{ address }}</p>
+            <p><strong>Telephone:</strong> {{ telephone }}</p>
+            <p><strong>Email:</strong> {{ email }}</p>
+        </div>
+        <hr>
+        <p><strong>Serial Number:</strong> {{ serial_number }}</p>
+        <p><strong>Date:</strong> {{ date }}</p>
+        <p><strong>Time:</strong> {{ time }}</p>
+        <hr>
+        <table>
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Quantity</th>
+                    <th>VAT</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.quantity }}</td>
+                    <td>{{ product.vat }}</td>
+                    <td>{{ product.price }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="total">
+            <p>Total: {{ total }}</p>
+            <p>Prices inclusive of 16% VAT where applicable.</p>
+        </div>
+        <div class="footer">
+            <p>Thank you for shopping with us!</p>
+            <p>Developed and maintained by TechOnward Fintech Ltd | Cashless Society</p>
+            <p>For inquiries, call +254705598269</p>
+        </div>
+    </div>
+</body>
+</html>

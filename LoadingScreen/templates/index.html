@@ -54,21 +54,39 @@
         footer {
             width: 100%;
             text-align: center;
-            padding: 20px;
-            background-color: #333;
-            color: #fff;
+            padding: 10px; /* Reduce padding */
+            background-color: gold; /* Change background color */
+            color: #333; /* Change text color */
+            position: fixed; /* Fixed position */
+            bottom: 0; /* Stick to the bottom */
+            left: 0; /* Align to the left */
+            right: 0; /* Align to the right */
+        }
+
+        footer p {
+            margin: 0; /* Remove default margin */
+        }
+        .container ul {
+            margin-top: 20px; /* Add margin to separate from heading */
+            padding: 0;
+            list-style-type: none;
+        }
+
+        .container ul li {
+            margin-bottom: 10px; /* Add space between each link */
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Welcome, {{ user.username }}!</h1>
+        <h1 style="color: gold;">Welcome, <span style="color: gold;">{{ username }}</span>!</h1>
         <h2>Home</h2>
-        <ul>
-            <li><a href="{{ url_for('sales_report') }}">Sales Report</a></li>
-            <li><a href="{{ url_for('top_selling_products_report') }}">Top Selling Products Report</a></li>
-            <li><a href="{{ url_for('revenue_trends_report') }}">Revenue Trends Report</a></li>
-        </ul>
+           <ul>
+               <li><a href="{{ url_for('sales_report') }}">Sales Report</a></li>
+               <li><a href="{{ url_for('top_selling_products_report') }}">Top Selling Products Report</a></li>
+               <li><a href="{{ url_for('revenue_trends_report') }}">Revenue Trends Report</a></li>
+         </ul>
+
         <a href="{{ url_for('logout') }}">Logout</a>
     </div>
 

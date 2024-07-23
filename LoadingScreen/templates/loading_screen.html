@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading Screen</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .loading-screen img {
+            width: 100%;
+            height: auto;
+            max-height: 70%;
+            max-width: 100%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
+
+        @keyframes flash {
+            0% { background-color: #0000ff; } /* Flashing blue at the top */
+            50% { background-color: transparent; }
+            100% { background-color: #0000ff; }
+        }
+
+        .flash-blue {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            animation: flash 0.5s linear infinite; /* Adjust the duration and timing function as needed */
+            z-index: 3;
+        }
+
+        @keyframes flashGold {
+            0% { background-color: #ffd700; } /* Flashing gold at the bottom */
+            50% { background-color: transparent; }
+            100% { background-color: #ffd700; }
+        }
+
+        .flash-gold {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            animation: flashGold 0.5s linear infinite; /* Adjust the duration and timing function as needed */
+            z-index: 3;
+        }
+
+        @keyframes spin {
+            0% { border-color: #ffff00 transparent transparent transparent; }
+            25% { border-color: transparent #0000ff transparent transparent; }
+            50% { border-color: transparent transparent #ffff00 transparent; }
+            75% { border-color: transparent transparent transparent #0000ff; }
+            100% { border-color: #ffff00 transparent transparent transparent; }
+        }
+
+        .loading-circle {
+            width: 150px;
+            height: 150px;
+            border: 15px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+ <h1>Loading...</h1>
+    <div class="loading-screen">
+        <div class="flash-blue"></div>
+        <img src="{{ url_for('static', filename='Screenshot2.png') }}" alt="Loading Image">
+        <div class="flash-gold"></div>
+        <div class="loading-circle"></div>
+    </div>
+     <script>
+        // After 1 minutes (60000 milliseconds), redirect to login.html
+        setTimeout(function() {
+            window.location.href = "/login";
+        }, 60000); // 60000 milliseconds = 1 minutes
+    </script>
+</body>
+</html>
