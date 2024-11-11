@@ -178,6 +178,7 @@ db_config = {
     "database": " Product"
 }
 
+
 # Retrieve M-Pesa parameters from environment variables or configuration file
 consumer_key = 'spXAyu89z4wGsvVLny6G0IeBoY8zgT42taN2i78I8WBFqBq5'
 consumer_secret = 'KDsygEUxULMOojqNQyGMzX9zRqWENSlXKQucqV8QPqu4cfe9LmyM79qzK91m5Cgl'

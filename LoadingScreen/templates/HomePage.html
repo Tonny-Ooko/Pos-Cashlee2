@@ -13,8 +13,6 @@
             color: blue; /* Set default text color to blue */
         }
 
-
-
         /* Top navigation bar style */
         .top-navbar {
             display: flex;
@@ -23,6 +21,7 @@
             padding: 10px 1cm; /* Adjusted width for top navigation bar */
             background-color: #000; /* Black background color for top navigation bar */
             color: white; /* Text color for navbar items */
+            height: 50px; /* Reduced height for top navigation bar */
         }
 
         /* Left navigation bar style */
@@ -34,9 +33,9 @@
             padding: 10px;
             background-color: blue; /* Blue background color for left navigation */
             width: 3cm; /* Width for left navigation bar */
-            height: 100vh; /* Full height from top to bottom */
+            height: calc(100vh - 50px); /* Full height minus the height of top navbar */
             position: fixed;
-            top: 0; /* Align to the top */
+            top: 50px; /* Align just below the top navigation bar */
             left: 0; /* Align to the left */
             z-index: 1; /* Ensure left navigation bar appears above other content */
         }
@@ -78,10 +77,21 @@
             bottom: 0;
             width: 100%;
         }
+
+        /* Payment status style */
+        .payment-status {
+            position: absolute;
+            right: 10px;
+            top: 60px; /* Adjusted position */
+            background-color: white;
+            padding: 10px;
+            border: 1px solid #000;
+            width: 300px;
+        }
     </style>
 </head>
 <body>
-     <!-- Top navigation bar -->
+    <!-- Top navigation bar -->
     <div class="top-navbar">
         <div class="right-group">
             <a href="{{ url_for('register') }}" class="nav-link">Register</a>
@@ -99,13 +109,17 @@
         <a href="/index3" class="nav-link">Authentication files</a>
         <a href="/transactions" class="nav-link">Login</a>
     </div>
-     <h1>Payment Status</h1>
-    {% if message %}
-        <p>{{ message }}</p>
-    {% endif %}
-    {% if error %}
-        <p>{{ error }}</p>
-    {% endif %}
+
+    <!-- Payment status -->
+    <div class="payment-status">
+        <h1>Payment Status</h1>
+        {% if message %}
+            <p>{{ message }}</p>
+        {% endif %}
+        {% if error %}
+            <p>{{ error }}</p>
+        {% endif %}
+    </div>
 
     <!-- Centered content -->
     <div class="centered-content">
@@ -115,10 +129,9 @@
         <h1>Welcome to Homepage</h1>
         <!-- Messaging details -->
         {% if success_message %}
-        <div>{{ success_message }}</div>
+            <div>{{ success_message }}</div>
         {% endif %}
     </div>
-
 
     <!-- Footer -->
     <footer>
