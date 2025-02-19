@@ -2,13 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Mail, Message
 from werkzeug.security import generate_password_hash, check_password_hash
-#from flask_dance.contrib.google import make_google_blueprint, google
-import secrets
-import google
-from itsdangerous import URLSafeSerializer
-import datetime
-from flask_migrate import Migrate
-import re  # Import the re module for regular expressions
+or regular expressions
 import pandas as pd
 from io import BytesIO
 import matplotlib.pyplot as plt
@@ -16,16 +10,6 @@ from argon2 import PasswordHasher  # Import these for URL manipulation
 from passlib.hash import argon2
 from werkzeug.urls import quote, unquote
 
-
-
-# Create an instance of the PasswordHasher with custom configuration if needed
-ph = PasswordHasher(
-    time_cost=2,  # Adjust time cost as needed
-    memory_cost=102400,  # Adjust memory cost as needed
-    parallelism=8,  # Adjust parallelism as needed
-)
-
-# Initialize OAuth with your credentials
 
 app = Flask(__name__, template_folder='.')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://TONNY:123456@localhost/point_of_sale'
@@ -46,8 +30,8 @@ decoded_string = unquote(encoded_string)
 
 
 # Configuration for Google OAuth
-client_id = '822402527612-jqbrumfeup205aabomol0hibeq73n4vi.apps.googleusercontent.com'
-client_secret = 'GOCSPX-WQ7JECy4Hf0Q9lPIl9oSVYfoENV'
+client_id = 'esrhyxdyfgqqytgsreetdcyvubinoojkbkugybhjrtfvgbuyhi.apps.googleusercontent.com'
+client_secret = 'Gerxctfbuyhinnkjmbvdcrtfgvbyhrctv jtdecrtfgvyb'
 redirect_uri = 'your_redirect_uri'
 scope = ['https://mail.google.com/']
 
@@ -60,8 +44,8 @@ authorize_url = 'https://accounts.google.com/o/oauth2/auth'
 
 
 # Add the OAuth credentials to your Flask config
-app.config['GOOGLE_CLIENT_ID'] = '822402527612-jqbrumfeup205aabomol0hibeq73n4vi.apps.googleusercontent.com'
-app.config['GOOGLE_CLIENT_SECRET'] = 'GOCSPX-WQ7JECy4Hf0Q9lPIl9oSVYfoENV'
+app.config['GOOGLE_CLIENT_ID'] = 'exctrvybuinjli,kmjhnsxedcrtbyhjidrtfbyuhn4vi.apps.googleusercontent.com'
+app.config['GOOGLE_CLIENT_SECRET'] = 'sexdcrtvbuyilvdcrftvbuy uiecrbuynnbfrt6uyhvdrbftyu'
 app.config['GOOGLE_DISCOVERY_URL'] = 'https://accounts.google.com/.well-known/openid-configuration'
 
 # Define a regular expression pattern for a strong password (e.g., at least one uppercase letter, one lowercase letter, one digit, and at least six characters long)
@@ -72,8 +56,6 @@ app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_SSL'] = True
 app.config['MAIL_USE_TLS'] = False
-app.config['MAIL_USERNAME'] = 'otienotonny55@gmail.com'
-app.config['MAIL_PASSWORD'] = '12230002tonnyO'
 
 
 
@@ -119,8 +101,6 @@ def generate_report45():
     start_date = request.args.get('start_date')
     end_date = request.args.get('end_date')
 
-    # Perform report generation using the provided dates
-    # Update this logic based on your requirements
 
     return "Sales report generated for dates: {} to {}".format(start_date, end_date)
 
@@ -132,17 +112,14 @@ def analyze_profitability01():
     start_date = request.args.get('start_date')
     end_date = request.args.get('end_date')
 
-    # Perform profitability analysis using the provided dates
-    # Update this logic based on your requirements
-
+   
     return "Profitability analysis for dates: {} to {}".format(start_date, end_date)
 
 
 # Route to display product information page
 @app.route('/product_information')
 def product_information():
-    # Retrieve and prepare product information to display on the page
-    # Replace the following with your actual data retrieval logic
+    #
     product_info = [
         {'name': 'Product 1', 'description': 'Description 1', 'price': 10.99},
         {'name': 'Product 2', 'description': 'Description 2', 'price': 19.99},
