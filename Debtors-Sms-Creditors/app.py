@@ -55,8 +55,8 @@ import  requests
 
 
 def send_sms(message, numbers):
-    api_key = 'AC9e9974f6964d042b09de1dd6341293e4'  # Twilio Account SID
-    auth_token = 'cb72e67a0d4d21885d098da2dd5e3d86'  # Twilio Auth Token
+    api_key = 'AFGHGJNNMKL<:>?>?:""""???>MLOGB JKKJN K M?KL JHN HN >KJN JLK'  # Twilio Account SID
+    auth_token = 'WZREXFCRGVHBJNL:MFVGHJK NL>>K>OIKJHMVCFG HIUJXFCVHJB'  # Twilio Auth Token
     base_url = f'https://api.twilio.com/2010-04-01/Accounts/{api_key}/Messages'
 
     success_count = 0  # Define success_count here
@@ -106,8 +106,8 @@ def email_marketing():
             message = request.form['message']
             email_list = request.form['email_list'].split(',')
 
-            sender_email = "otienotonny55@gmail.com"  # Replace with your email
-            password = "sjhj bngi zxbt uxrw"  # Replace with your password
+            sender_email = "ghguvyhybhbhubk@gmail.com"  # Replace with your email
+            password = "VBHNJOLI<JFKLYGBNUGIYV YBHUHH"  # Replace with your password
 
             for email in email_list:
                 msg = MIMEMultipart()
