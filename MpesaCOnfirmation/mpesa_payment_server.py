@@ -60,11 +60,6 @@ def mpesa_payment_webhook():
     if scan_mpesa_message(message) and (till_number == 'your_registered_till_number' or
                                         paybill_number == 'your_registered_paybill_number' and
                                         account_number == 'your_registered_account_number'):
-        # Assuming you have a way to get the user name, day, date, and time
-        user_name = "John Doe"  # Replace this with your logic to get the user name
-        day = "Monday"  # Replace this with your logic to get the day
-        date = "2023-07-30"  # Replace this with your logic to get the date
-        time = "12:34:56"  # Replace this with your logic to get the time
 
         # Store the transaction details
         store_transaction_details(user_name, scan_mpesa_message(message), day, date, time)
