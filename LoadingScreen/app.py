@@ -112,27 +112,7 @@ data = "Tonnyt%*^ooko12@2023"
 encoded_string = quote(data)
 
 # Replace occurrences of url_decode with unquote
-decoded_string = unquote(encoded_string)
-
-
-# Configuration for Google OAuth
-client_id = '822402527612-jqbrumfeup205aabomol0hibeq73n4vi.apps.googleusercontent.com'
-client_secret = 'GOCSPX-WQ7JECy4Hf0Q9lPIl9oSVYfoENV'
-redirect_uri = 'your_redirect_uri'
-scope = ['https://mail.google.com/']
-
-# Google OAuth endpoints
-authorization_base_url = 'https://accounts.google.com/o/oauth2/auth'
-token_url = 'https://oauth2.googleapis.com/token'
-authorize_url = 'https://accounts.google.com/o/oauth2/auth'
-
-
-
-
-# Add the OAuth credentials to your Flask config
-app.config['GOOGLE_CLIENT_ID'] = '822402527612-jqbrumfeup205aabomol0hibeq73n4vi.apps.googleusercontent.com'
-app.config['GOOGLE_CLIENT_SECRET'] = 'GOCSPX-WQ7JECy4Hf0Q9lPIl9oSVYfoENV'
-app.config['GOOGLE_DISCOVERY_URL'] = 'https://accounts.google.com/.well-known/openid-configuration'
+decoded_string = unquote(encoded_string)'
 
 # Define a regular expression pattern for a strong password (e.g., at least one uppercase letter, one lowercase letter, one digit, and at least six characters long)
 password_pattern = re.compile(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$')
@@ -161,16 +141,6 @@ migrate = Migrate(app, db)
 cursor = conn.cursor()
 
 
-
-
-# Replace these with your actual database credentials
-db_config = {
-    "host": "localhost",
-    "user": "TONNY",
-    "password": "123456",
-    "database": "point_of_sale"
-}
-
 db_config = {
     "host": "localhost",
     "user": "TONNY",
@@ -178,10 +148,6 @@ db_config = {
     "database": " Product"
 }
 
-
-# Retrieve M-Pesa parameters from environment variables or configuration file
-consumer_key = 'spXAyu89z4wGsvVLny6G0IeBoY8zgT42taN2i78I8WBFqBq5'
-consumer_secret = 'KDsygEUxULMOojqNQyGMzX9zRqWENSlXKQucqV8QPqu4cfe9LmyM79qzK91m5Cgl'
 
 # Function to get access token
 def get_access_token(consumer_key, consumer_secret):
@@ -195,21 +161,7 @@ def get_access_token(consumer_key, consumer_secret):
 @app.route('/register_urls', methods=['POST'])
 def register_urls():
     try:
-        access_token = get_access_token()
-
-        url = 'https://sandbox.safaricom.co.ke/mpesa/c2b/v1/registerurl'
-        payload = request.json
-        payload['ShortCode'] = "4224574"
-        payload['ResponseType'] = "Complete"
-        payload['ConfirmationURL'] = "https://confirmation.techonwardfintech.com"
-        payload['ValidationURL'] = "https://validation.techonwardfintech.com"
-
-        headers = {
-            'Content-Type': 'application/json',
-            'Authorization': f'Bearer {access_token}'
-        }
-        response = requests.post(url, json=payload, headers=headers)
-
+       
         if response.status_code == 200:
             return jsonify({'message': 'URLs registered successfully'}), 200
         else:
@@ -301,12 +253,12 @@ def fetch():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        # Check login credentials here
-        # If login is successful, redirect to HomePage.html
+         Check login credentials here
+         If login is successful, redirect to HomePage.html
         # Example:
-        # if login_successful:
-        #     return redirect(url_for('home_page'))
-        return redirect(url_for('home_page'))  # Temporary redirect for demo
+        if login_successful:
+            return redirect(url_for('home_page'))
+        return redirect(url_for('home_page'))  
 
     return render_template('login.html')
 
@@ -1285,33 +1237,6 @@ def product_registration():
         return render_template('inventory.html', message=message)
 
     return render_template('inventory.html', message=None)
-
-class AuditResult(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    result_text = db.Column(db.String(128))
-
-
-class PaymentTransaction(db.Model):
-    id = db.Column(db.Integer, primary_key=True)  # Define 'id' as the primary key
-    date = db.Column(db.Date)
-    amount = db.Column(db.Float)
-    product_id = db.Column(db.Integer, db.ForeignKey('product.id'))  # Assuming 'product' table has an 'id' column
-    # Define a relationship with the Product model if needed
-    product = db.relationship('Product', backref='transactions')
-    # Add other fields as needed
-
-
-class StoreManagement(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(255))
-    # Add other fields as needed
-
-
-class Product(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(255))
-    price = db.Column(db.Float)
-    # Add other fields as needed
 
 
 # Route to generate a sales report
